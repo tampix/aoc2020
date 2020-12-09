@@ -1,7 +1,4 @@
-(ns aoc2020.d5-reduce)
-
-(def input
-  "BFFFBBFRLR
+BFFFBBFRLR
 FBFFFBBLRL
 BFFFFFBRRR
 FBBBFFFLRR
@@ -789,38 +786,4 @@ BFBBBFBRRL
 FFFBBBBLLL
 BBFBFBBRRL
 FFBFFBBLRR
-FBBFFBFLLR")
-
-(defn seat->id
-  [seat]
-  (-> seat
-      (clojure.string/replace #"." {"F" "0", "L" "0", "B" "1", "R" "1"})
-      (Integer/parseInt 2)))
-
-;; Overkill, i could've just do it the simple way with loop+recur
-(defn juxt-reduce
-  "Perform the juxtaposition of `fs` as a single reduce on `coll`.
-
-  This is equivalent to (mapv #(reduce % coll) fs)
-
-  (juxt-reduce [min max] (range 100)) => [0 99]
-  (juxt-reduce [+ -] [55 -55] (range 10)) => [100 -100])
-  (juxt-reduce [+ *] nil) => [0 1]"
-  ([fs coll]
-   (if-let [[x & xs] (seq coll)]
-     (juxt-reduce fs (repeat (count fs) x) xs)
-     (mapv #(apply % []) fs)))
-  ([fs acc coll]
-   (reduce (fn [acc cur] (mapv #(%1 %2 cur) fs acc)) acc coll)))
-
-(defn day5
-  [input]
-  (let [[min-id max-id xor-id] (->> (clojure.string/split-lines input)
-                                    (map seat->id)
-                                    (juxt-reduce [min max bit-xor]))]
-    ;; part1
-    (println max-id)
-    ;; part2
-    (println (reduce bit-xor xor-id (range min-id (inc max-id))))))
-
-(day5 input)
+FBBFFBFLLR
