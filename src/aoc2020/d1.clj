@@ -11,8 +11,3 @@
     (println (some #(some->> (util/find-sum nums (- 2020 %))
                              (apply * %))
                    nums))))
-
-(comment
-  (day1)
-
-  )

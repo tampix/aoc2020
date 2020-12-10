@@ -30,8 +30,3 @@
          (remove :err)
          (some :acc)
          println)))
-
-(comment
-  (day8)
-
-  )

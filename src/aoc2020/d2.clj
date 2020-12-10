@@ -25,8 +25,3 @@
   (let [rules (input->rules (util/read-input-lines 2))]
     (doseq [part-pred [part1-valid? part2-valid?]]
       (println (count (filter part-pred rules))))))
-
-(comment
-  (day2)
-
-  )

@@ -44,8 +44,3 @@
          (filter (every-pred has-all-keys? all-entries-valid?))
          count
          println)))
-
-(comment
-  (day4)
-
-  )

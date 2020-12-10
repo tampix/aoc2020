@@ -1,23 +1,44 @@
 (ns aoc2020.core
+  (:require [criterium.core :as crit]
+            [clojure.string :as str])
   (:gen-class))
 
-(defn- execute-day
+(defn- get-day-fn
   [day]
-  (println "Day" day)
   (try
     (let [ns-sym (symbol (str "aoc2020.d" day))]
       (when-not (find-ns ns-sym)
         (require ns-sym))
-      (let [day-fn (ns-resolve ns-sym (symbol (str "day" day)))]
-        (time (apply day-fn []))))
+      (ns-resolve ns-sym (symbol (str "day" day))))
     (catch Exception _
-      (println "Not implemented yet.")))
-  (println))
+      nil)))
+
+(defn- execute-day
+  [day-fn]
+  (time (day-fn)))
+
+(defn- benchmark-day
+  [day-fn]
+  (let [lines (->> (day-fn)
+                   with-out-str
+                   (crit/quick-bench)
+                   with-out-str
+                   str/split-lines)]
+    (doseq [line lines]
+      (if (some #(str/includes? line %) ["mean" "std-deviation"])
+        (println line)))))
 
 (defn -main
-  [& _]
-  (doseq [day (range 25)]
-    (execute-day (inc day))))
+  [& args]
+  (let [op-fn (if (contains? (set args) "-b")
+                benchmark-day
+                execute-day)]
+    (doseq [day (range 1 26)]
+      (println "Day" day ":")
+      (if-let [day-fn (get-day-fn day)]
+        (op-fn day-fn)
+        (println "Not implemented yet."))
+      (println))))
 
 (comment
   (-main)

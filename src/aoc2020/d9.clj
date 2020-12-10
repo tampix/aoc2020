@@ -23,8 +23,3 @@
            (reduce + (util/juxt-reduce [min max] window)))
          first
          println)))
-
-(comment
-  (day9)
-
-  )

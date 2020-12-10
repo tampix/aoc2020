@@ -37,8 +37,3 @@
          println)
     ;; part2
     (println (count-bag-contained graph "shiny gold"))))
-
-(comment
-  (day7)
-
-  )

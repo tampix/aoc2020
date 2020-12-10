@@ -1,6 +1,5 @@
 (ns aoc2020.d10
-  (:require [aoc2020.util :as util]
-            [clojure.string :as str]))
+  (:require [aoc2020.util :as util]))
 
 (defn parse
   []

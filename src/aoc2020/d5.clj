@@ -17,8 +17,3 @@
     (println max-id)
     ;; part2
     (println (reduce bit-xor xor-id (range min-id (inc max-id))))))
-
-(comment
-  (day5)
-
-  )

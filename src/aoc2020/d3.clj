@@ -19,8 +19,3 @@
                      [[1 1] [3 1] [5 1] [7 1] [1 2]])]
     (println (counts [3 1]))
     (println (reduce * (vals counts)))))
-
-(comment
-  (day3)
-
-  )

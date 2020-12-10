@@ -15,8 +15,3 @@
                       count))
            (reduce +)
            println))))
-
-(comment
-  (day6)
-
-  )

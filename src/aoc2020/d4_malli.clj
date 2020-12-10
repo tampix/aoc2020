@@ -42,8 +42,3 @@
            (filter pred)
            count
            println))))
-
-(comment
-  (day4)
-
-  )
